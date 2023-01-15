@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>123</title>
+	</head>
+	<body>
+		<main>
+			<h2>Запуск:</h2>
+			<form action="/start" id="form">
+				<br>
+				<input type="reset" value="Сбросить">
+				<input type="submit" value="Запустить">
+			</form>
+		</main>
+
+		<script type="text/javascript" defer>
+			let arr = %PINS%;
+			let degs = %DEGS%;
+			let times = %TIMES%;
+
+			const form = document.getElementById("form");
+
+			arr.forEach(function(item, i, arr) {
+				let input_deg = document.createElement("input");
+				// div.className = "alert";
+				input_deg.type = "number";
+				input_deg.value = degs[i];
+				input_deg.min = 0;
+				input_deg.max = 180;
+				input_deg.required = true;
+				input_deg.name = i + "_deg";
+
+				let input_time = document.createElement("input");
+				// div.className = "alert";
+				input_time.type = "number";
+				input_time.value = times[i];
+				input_time.min = 0;
+				input_time.required = true;
+				input_time.name = i + "_time";
+
+				form.prepend(document.createElement("br"));
+				form.prepend(document.createTextNode("C"));
+				form.prepend(input_time);
+				form.prepend(document.createTextNode("°"));
+				form.prepend(input_deg);
+				form.prepend(document.createTextNode("S" + (i + 1) + " (PIN: " + item + ")"));
+			});
+		</script>
+	</body>
+</html>
